@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slider</title>
+    <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+    <div id="app" v-cloak>
+
+        <div class="container">
+            <!-- inseriamo gli eventi come vue ci indica tramite @ -->
+            <div class="slider-wrapper" @mouseenter="fine" @mouseleave="inizio" tabindex="0">
+                <!-- contenuto -->
+                <div class="item">
+                    <!-- immagine a sinistra -->
+                    <img :src="slides[sliderActive].image" alt="slides[sliderActive].title" />
+                    <!-- testo -->
+                    <div class="text">
+                        <h3>{{ slides[sliderActive].title }}</h3>
+                        <p>
+                            {{ slides[sliderActive].text }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="thumbs">
+                    <!-- bottone prev -->
+                    <div class="prev" @click="prevImage"></div>
+                    <!-- /bottone prev -->
+
+                    <!-- bottone next -->
+                    <div class="next" @click="nextImage"></div>
+                    <!-- /bottone next -->
+
+                    <!-- ciclo for tramite metodo vue -->
+                    <!-- immagini a destra -->
+                    <div v-for="(img, index) in slides" class="thumb" :class="{sliderActive : selezionata(index)}">
+                        <img :src="img.image" :alt="img.title" @click="currentImage(index)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- vue -->
+    <script src='https://unpkg.com/vue@3/dist/vue.global.js'></script>
+    <!-- /vue -->
+    <!-- js -->
+    <script src="js/main.js"></script>
+    <!-- /js -->
+</body>
+
+</html>
